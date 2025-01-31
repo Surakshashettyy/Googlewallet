@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (/android/i.test(userAgent)) {
             // Try opening the Google Wallet app directly using an intent
-            window.location.href = "intent://wallet/#Intent;package=com.google.android.apps.walletnfcrel;scheme=https;action=android.intent.action.VIEW;end;";
+            window.location.href = "intent://wallet/#Intent;scheme=https;package=com.google.android.apps.walletnfcrel;end;";
         } 
         else {
             // For Desktop/Laptop users, redirect to Google Wallet website
