@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function() {
         let userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
         if (/android/i.test(userAgent)) {
-            // Redirect Android users to Google Wallet App
-            window.location.href = "intent://wallet.google.com/#Intent;package=com.google.android.apps.walletnfcrel;scheme=https;end;";
+            // Open Google Wallet App directly on Android
+            window.location.href = "intent://wallet.google.com/#Intent;scheme=https;package=com.google.android.apps.walletnfcrel;end;";
         } 
         else {
             // For Desktop/Laptop users, redirect to Google Wallet website
