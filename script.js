@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Generate QR Code
+    // Generate QR Code with text "Laila Doifoo 1234"
     new QRCode(document.getElementById("qrcode"), {
         text: "Laila Doifoo 1234",
         width: 100,
@@ -11,12 +11,11 @@ document.addEventListener("DOMContentLoaded", function() {
         let userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
         if (/android/i.test(userAgent)) {
-            // Try opening the Google Wallet app directly using an intent
-            window.location.href = "intent://wallet/#Intent;package=com.google.android.apps.walletnfcrel;scheme=https;action=android.intent.action.VIEW;end;";
-        } 
-        else {
-            // For Desktop/Laptop users, redirect to Google Wallet website
-            window.location.href = "https://pay.google.com/gp/v/save/";
-        }
-    });
+            // Redirect Android users to the QR link
+            window.location.href = "YOUR_ANDROID_QR_LINK_HERE"; // Replace with your QR link
+        } else {
+            // Redirect others to Google Wallet
+            window.location.href = "https://wallet.google/";
+        }
+    });
 });
