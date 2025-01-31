@@ -11,8 +11,13 @@ document.addEventListener("DOMContentLoaded", function() {
         let userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
         if (/android/i.test(userAgent)) {
-            // Open Google Wallet App directly on Android
-            window.location.href = "intent://wallet.google.com/#Intent;scheme=https;package=com.google.android.apps.walletnfcrel;end;";
+            // Try opening Google Wallet app directly
+            window.location.href = "googlewallet://";
+
+            // Fallback: If the app doesn't open in a few seconds, redirect to Play Store
+            setTimeout(() => {
+                window.location.href = "https://play.google.com/store/apps/details?id=com.google.android.apps.walletnfcrel";
+            }, 2000); // 2-second delay before fallback
         } 
         else {
             // For Desktop/Laptop users, redirect to Google Wallet website
