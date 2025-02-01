@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (/android/i.test(userAgent)) {
             // Check if Google Wallet app is installed
-            window.location.href = "intent://wallet.google.com/#Intent;scheme=https;package=com.google.android.apps.walletnfcrel;end;";
+            window.location.href = "intent://wallet.google.com/#Intent;scheme=https;package=com.google.android.apps.walletnfcrel;S.browser_fallback_url=https://wallet.google.com;end;";
             setTimeout(function() {
                 // If the app is not installed, redirect to the Google Wallet website
                 window.location.href = "https://wallet.google/";
