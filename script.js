@@ -1,22 +1,12 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Generate QR Code
-    new QRCode(document.getElementById("qrcode"), {
-        text: "Laila Doifoo 1234",
-        width: 100,
-        height: 100
-    });
+document.getElementById("addToWallet").addEventListener("click", function() {
+    let userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-    // Button click event
-    document.getElementById("addToWallet").addEventListener("click", function() {
-        let userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-        if (/android/i.test(userAgent)) {
-            // Open Google Wallet app directly
-            window.location.href = "intent://wallet.google.com/#Intent;package=com.google.android.apps.walletnfcrel;action=android.intent.action.VIEW;end;";
-        } 
-        else {
-            // For Desktop/Laptop users, redirect to Google Wallet website
-            window.location.href = "https://wallet.google/";
-        }
-    });
+    if (/android/i.test(userAgent)) {
+        // Open Google Wallet app directly
+        window.location.href = "intent://wallet.google.com/#Intent;package=com.google.android.apps.walletnfcrel;action=com.google.android.apps.wallet.additem.ADD_ITEM;end;";
+    } 
+    else {
+        // Fallback for desktop users
+        window.location.href = "https://pay.google.com";
+    }
 });
