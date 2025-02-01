@@ -1,22 +1,11 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Generate QR Code
-    new QRCode(document.getElementById("qrcode"), {
-        text: "Laila Doifoo 1234",
-        width: 100,
-        height: 100
-    });
-
-    // Button click event
-    document.getElementById("addToWallet").addEventListener("click", function() {
-        let userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-        if (/android/i.test(userAgent)) {
-            // Open Google Wallet app directly
-            window.location.href = "intent://wallet.google.com/#Intent;package=com.google.android.apps.walletnfcrel;action=android.intent.action.VIEW;end;";
-        } 
-        else {
-            // For Desktop/Laptop users, redirect to Google Wallet website
-            window.location.href = "https://wallet.google/";
-        }
-    });
-});
+try {
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    intent.setData(Uri.parse("googlewallet://"));
+    intent.setPackage("com.google.android.apps.walletnfcrel");
+    startActivity(intent);
+} catch (ActivityNotFoundException e) {
+    // Google Wallet app is not installed, redirect to Play Store or handle accordingly
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.walletnfcrel"));
+    startActivity(intent);
+}
