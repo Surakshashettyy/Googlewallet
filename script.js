@@ -1,22 +1,21 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Generate QR Code
-    new QRCode(document.getElementById("qrcode"), {
-        text: "Laila Doifoo 1234",
-        width: 100,
-        height: 100
-    });
+document.getElementById("add-to-wallet").addEventListener("click", async () => {
+    const jwt = "YOUR_SIGNED_JWT_HERE"; // Replace this with your JWT logic
 
-    // Button click event
-    document.getElementById("addToWallet").addEventListener("click", function() {
-        let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    if (!jwt) return;
 
-        if (/android/i.test(userAgent)) {
-            // Open Google Wallet app directly using a well-formed intent
-            window.location.href = "intent://wallet/#Intent;package=com.google.android.apps.walletnfcrel;end;";
-        } 
-        else {
-            // For Desktop/Laptop users, redirect to Google Wallet website
-            window.location.href = "https://wallet.google/";
-        }
-    });
+    const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Try opening Google Wallet app
+        const walletDeepLink = `intent://wallet.google.com/gp/v/save/${jwt}#Intent;scheme=https;package=com.google.android.apps.walletnfcrel;end;`;
+        window.location.href = walletDeepLink;
+
+        // If Wallet app isn't installed, fallback to browser after 2 sec
+        setTimeout(() => {
+            window.location.href = `https://wallet.google/`;
+        }, 2000);
+    } else {
+        // On desktop, open Google Wallet in browser
+        window.open(`https://wallet.google/`, "_blank");
+    }
 });
